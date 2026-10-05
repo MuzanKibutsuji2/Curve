@@ -1,10 +1,10 @@
-import { HEX, ROADMAP, ROUTER } from "@/lib/content";
+import { HEX, METRICS, ROADMAP, ROUTER } from "@/lib/content";
 import { Reveal } from "./Reveal";
 
 export function Roadmap() {
   return (
     <>
-      <div className="relative mt-14">
+      <div className="relative mt-2">
         {/* spine */}
         <div className="ramp-line absolute inset-x-0 top-[7px] hidden h-px opacity-45 lg:block" aria-hidden />
 
@@ -73,6 +73,34 @@ export function Roadmap() {
               </li>
             ))}
           </ul>
+        </Reveal>
+      </div>
+
+      {/* how we will know it worked */}
+      <div className="mt-20 grid gap-12 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1fr)] lg:gap-16">
+        <Reveal>
+          <span className="eyebrow text-[var(--color-dimmer)]">North star</span>
+          <p className="h-title mt-5 max-w-[13ch] text-balance">
+            Verified work completed <span className="serif ramp-text italic">per week.</span>
+          </p>
+          <p className="mt-5 max-w-[42ch] text-[0.9375rem] leading-[1.62] text-[#9aa0b2]">
+            Not messages sent. Not tokens burned. Not time on task. The only number that matters is how
+            much real work Curve finished and could prove it finished.
+          </p>
+        </Reveal>
+
+        <Reveal delay={90}>
+          <dl className="border-t border-[var(--color-line-strong)]">
+            {METRICS.map((m) => (
+              <div
+                key={m.k}
+                className="grid gap-1 border-b border-[var(--color-line)] py-3 sm:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] sm:items-baseline sm:gap-6"
+              >
+                <dt className="text-[0.875rem] font-medium text-[#dfe2ea]">{m.k}</dt>
+                <dd className="text-[0.8125rem] leading-snug text-[#8b90a0]">{m.v}</dd>
+              </div>
+            ))}
+          </dl>
         </Reveal>
       </div>
     </>

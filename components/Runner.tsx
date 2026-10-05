@@ -15,7 +15,7 @@ export function Runner() {
     <>
       {/* architecture chain */}
       <Reveal>
-        <div className="scroll-thin mt-12 flex items-center gap-2 overflow-x-auto pb-2">
+        <div className="scroll-thin flex items-center gap-2 overflow-x-auto pb-2">
           {CHAIN.map((s, i) => (
             <span key={s.label} className="flex shrink-0 items-center gap-2">
               <span

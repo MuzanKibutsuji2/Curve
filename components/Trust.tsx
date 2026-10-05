@@ -11,7 +11,7 @@ const TONE: Record<string, { fg: string; bg: string }> = {
 export function Trust() {
   return (
     <>
-      <div className="mt-14 grid gap-12 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] lg:gap-16">
+      <div className="grid gap-12 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] lg:gap-16">
         {/* permission ladder */}
         <Reveal>
           <h3 className="eyebrow text-[var(--color-dimmer)]">Permission levels</h3>

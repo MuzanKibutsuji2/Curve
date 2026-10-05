@@ -9,7 +9,7 @@ export function Pricing() {
       <div className="grid-field-paper pointer-events-none absolute inset-0 opacity-70" aria-hidden />
       <div className="relative">
         <SectionHead
-          n="10"
+          n="06"
           eyebrow="Pricing"
           light
           align="split"

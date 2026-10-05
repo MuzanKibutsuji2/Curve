@@ -3,7 +3,7 @@ import { Reveal } from "./Reveal";
 
 export function Capabilities() {
   return (
-    <div className="mt-14 grid gap-px overflow-hidden rounded-[12px] border border-[var(--color-line)] bg-[var(--color-line)] sm:grid-cols-2 lg:grid-cols-3">
+    <div className="grid gap-px overflow-hidden rounded-[12px] border border-[var(--color-line)] bg-[var(--color-line)] sm:grid-cols-2 lg:grid-cols-3">
       {CAPABILITIES.map((c, i) => (
         <Reveal key={c.name} delay={Math.min(i, 8) * 40}>
           <article className="group relative h-full bg-[var(--color-ink)] p-6 transition-colors duration-300 hover:bg-[var(--color-ink-2)]">

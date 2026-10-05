@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Backdrop } from "./Backdrop";
+import { Words } from "./motion";
 import { RunPanel } from "./RunPanel";
 import { Reveal } from "./Reveal";
 
@@ -25,15 +26,11 @@ export function Hero() {
           </div>
         </Reveal>
 
-        <Reveal delay={90}>
-          <h1 className="h-mega mt-7 max-w-[17ch]">
-            Describe the outcome.
-            <br />
-            <span className="text-[var(--color-dim)]">Curve does the work</span>
-            <br />
-            <span className="serif ramp-text italic">and proves it did.</span>
-          </h1>
-        </Reveal>
+        <Words as="h1" className="h-mega mt-7 block max-w-[17ch]" delay={120} stagger={52}>
+          Describe the outcome.{" "}
+          <span className="text-[var(--color-dim)]">Curve does the work</span>{" "}
+          <span className="serif ramp-text italic">and proves it did.</span>
+        </Words>
 
         <div className="mt-10 grid gap-10 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)] lg:items-end">
           <Reveal delay={170}>

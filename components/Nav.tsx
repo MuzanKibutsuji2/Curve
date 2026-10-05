@@ -3,13 +3,13 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { Wordmark } from "./CurveMark";
+import { ScrollProgress } from "./motion";
 
 const LINKS = [
   { href: "/#loop", label: "How it works" },
-  { href: "/#runner", label: "Runner" },
-  { href: "/#agents", label: "Agents" },
-  { href: "/#workflows", label: "Workflows" },
-  { href: "/#trust", label: "Permissions" },
+  { href: "/#platform", label: "Platform" },
+  { href: "/agents", label: "Agents" },
+  { href: "/#uses", label: "Use cases" },
   { href: "/#pricing", label: "Pricing" },
 ];
 
@@ -88,6 +88,7 @@ export function Nav() {
             </button>
           </div>
         </nav>
+        <ScrollProgress />
       </header>
 
       {/* mobile sheet */}

@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 import { Reveal } from "./Reveal";
+import { Words } from "./motion";
 
 export function SectionHead({
   n,
@@ -34,7 +35,9 @@ export function SectionHead({
             : "mt-8"
         }
       >
-        <h2 className="h-display max-w-[18ch] text-balance">{title}</h2>
+        <Words as="h2" className="h-display block max-w-[18ch] text-balance" stagger={38}>
+          {title}
+        </Words>
         {lede && (
           <p className={`max-w-[54ch] text-[1.0625rem] leading-[1.62] ${body} ${align === "split" ? "" : "mt-5"}`}>
             {lede}
