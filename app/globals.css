@@ -1,0 +1,453 @@
+@import "tailwindcss";
+
+/* ───────────────────────── Typefaces ───────────────────────── */
+
+@font-face {
+  font-family: "Inter Tight";
+  src: url("/fonts/inter-tight-latin-wght-normal.woff2") format("woff2-variations");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Inter Tight";
+  src: url("/fonts/inter-tight-latin-wght-italic.woff2") format("woff2-variations");
+  font-weight: 100 900;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Instrument Serif";
+  src: url("/fonts/instrument-serif-latin-400-normal.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Instrument Serif";
+  src: url("/fonts/instrument-serif-latin-400-italic.woff2") format("woff2");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "JetBrains Mono";
+  src: url("/fonts/jetbrains-mono-latin-wght-normal.woff2") format("woff2-variations");
+  font-weight: 100 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ───────────────────────── Tokens ───────────────────────── */
+
+@theme {
+  --font-sans: "Inter Tight", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-serif: "Instrument Serif", ui-serif, Georgia, serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+
+  /* ink = night canvas, paper = daylight canvas */
+  --color-ink: #08090c;
+  --color-ink-2: #0d0f14;
+  --color-ink-3: #14171e;
+  --color-paper: #f1eee7;
+  --color-paper-2: #e6e2d8;
+
+  /* the Curve ramp — one hue per stage of the execution loop */
+  --color-citron: #cdff3e;
+  --color-aqua: #3be8c0;
+  --color-iris: #6b5cff;
+  --color-magenta: #ff4d9e;
+  --color-flame: #ff6a2b;
+  --color-amber: #ffc83d;
+
+  --color-line: color-mix(in oklab, #ffffff 11%, transparent);
+  --color-line-strong: color-mix(in oklab, #ffffff 22%, transparent);
+  --color-dim: #8b90a0;
+  --color-dimmer: #5d6273;
+
+  --text-mega: clamp(2.9rem, 8.4vw, 8.25rem);
+  --text-display: clamp(2.3rem, 5.6vw, 5rem);
+  --text-title: clamp(1.75rem, 3.2vw, 3rem);
+}
+
+/* ───────────────────────── Base ───────────────────────── */
+
+/* Default hairline colour. Must live in @layer base so that any explicit
+   `border-<colour>` utility still wins — unlayered rules would beat them. */
+@layer base {
+  *,
+  ::before,
+  ::after {
+    border-color: var(--color-line);
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background: var(--color-ink);
+  color: #eceef4;
+  font-family: var(--font-sans);
+  font-feature-settings: "ss01", "cv05", "tnum" 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: var(--color-citron);
+  color: #000;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-citron);
+  outline-offset: 3px;
+}
+
+/* Thin scrollbars inside code / log panes */
+.scroll-thin::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+.scroll-thin::-webkit-scrollbar-thumb {
+  background: #2a2e38;
+  border-radius: 99px;
+}
+.scroll-thin::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* ───────────────────────── Type helpers ───────────────────────── */
+
+.h-mega {
+  font-size: var(--text-mega);
+  line-height: 0.88;
+  letter-spacing: -0.045em;
+  font-weight: 600;
+}
+.h-display {
+  font-size: var(--text-display);
+  line-height: 0.95;
+  letter-spacing: -0.038em;
+  font-weight: 600;
+}
+.h-title {
+  font-size: var(--text-title);
+  line-height: 1.02;
+  letter-spacing: -0.03em;
+  font-weight: 600;
+}
+.serif {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  letter-spacing: -0.01em;
+}
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+.mono-xs {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.02em;
+}
+
+/* ───────────────────────── Surfaces ───────────────────────── */
+
+.rule {
+  border-top: 1px solid var(--color-line);
+}
+
+/* faint engineering grid */
+.grid-field {
+  background-image: linear-gradient(to right, color-mix(in oklab, #fff 4%, transparent) 1px, transparent 1px),
+    linear-gradient(to bottom, color-mix(in oklab, #fff 4%, transparent) 1px, transparent 1px);
+  background-size: 76px 76px;
+}
+.grid-field-paper {
+  background-image: linear-gradient(to right, rgba(8, 9, 12, 0.06) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(8, 9, 12, 0.06) 1px, transparent 1px);
+  background-size: 76px 76px;
+}
+
+.noise::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.035;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+.ramp-text {
+  background: linear-gradient(
+    96deg,
+    var(--color-citron) 0%,
+    var(--color-aqua) 26%,
+    var(--color-iris) 52%,
+    var(--color-magenta) 74%,
+    var(--color-flame) 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.ramp-line {
+  background: linear-gradient(
+    90deg,
+    var(--color-citron),
+    var(--color-aqua),
+    var(--color-iris),
+    var(--color-magenta),
+    var(--color-flame),
+    var(--color-amber)
+  );
+}
+
+/* ───────────────────────── Motion ───────────────────────── */
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.reveal {
+  opacity: 0;
+}
+.reveal.in {
+  animation: rise 0.72s cubic-bezier(0.16, 0.84, 0.32, 1) forwards;
+}
+
+@keyframes drift {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(2%, -3%, 0) scale(1.08);
+  }
+}
+.drift {
+  animation: drift 18s ease-in-out infinite;
+}
+
+@keyframes dash {
+  to {
+    stroke-dashoffset: -1000;
+  }
+}
+
+@keyframes blink {
+  0%,
+  49% {
+    opacity: 1;
+  }
+  50%,
+  100% {
+    opacity: 0.15;
+  }
+}
+.blink {
+  animation: blink 1.2s steps(1) infinite;
+}
+
+@keyframes slide-x {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+.marquee-track {
+  animation: slide-x 38s linear infinite;
+}
+.marquee-track-slow {
+  animation: slide-x 64s linear infinite;
+}
+
+/* ── sigils ── */
+@keyframes sigil-draw {
+  from {
+    stroke-dashoffset: 100;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+@keyframes sigil-pop {
+  from {
+    transform: scale(0);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* ── fusion ── */
+@keyframes fuse-ring {
+  0% {
+    transform: scale(0.3);
+    opacity: 0;
+  }
+  35% {
+    opacity: 0.85;
+  }
+  100% {
+    transform: scale(2.6);
+    opacity: 0;
+  }
+}
+.fuse-ring {
+  animation: fuse-ring 900ms cubic-bezier(0.2, 0.7, 0.3, 1) forwards;
+}
+
+@keyframes fuse-in {
+  0% {
+    transform: scale(0.82) translateY(10px);
+    opacity: 0;
+    filter: blur(8px);
+  }
+  100% {
+    transform: none;
+    opacity: 1;
+    filter: blur(0);
+  }
+}
+.fuse-in {
+  animation: fuse-in 620ms cubic-bezier(0.16, 0.84, 0.32, 1) both;
+}
+
+@keyframes spark {
+  0% {
+    transform: translate(0, 0) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(var(--dx), var(--dy)) scale(0);
+    opacity: 0;
+  }
+}
+.spark {
+  animation: spark 820ms cubic-bezier(0.2, 0.7, 0.3, 1) forwards;
+}
+
+/* ── word-by-word headline reveal ── */
+@keyframes word-up {
+  from {
+    opacity: 0;
+    transform: translateY(0.42em) rotate(1.2deg);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.word {
+  display: inline-block;
+}
+.words .word {
+  opacity: 0;
+}
+.words.in .word {
+  animation: word-up 0.68s cubic-bezier(0.17, 0.85, 0.3, 1) forwards;
+}
+
+/* ── spotlight that follows the pointer across a card ── */
+.spot {
+  position: relative;
+}
+.spot::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.35s;
+  background: radial-gradient(
+    380px circle at var(--mx, 50%) var(--my, 50%),
+    color-mix(in oklab, var(--spot, #6b5cff) 16%, transparent),
+    transparent 62%
+  );
+}
+.spot:hover::before {
+  opacity: 1;
+}
+
+/* ── range dials ── */
+input[type="range"].dial {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 3px;
+  border-radius: 99px;
+  outline-offset: 6px;
+  cursor: pointer;
+}
+input[type="range"].dial::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 14px;
+  height: 14px;
+  border-radius: 99px;
+  background: var(--c, #fff);
+  border: 2px solid var(--color-ink);
+  box-shadow: 0 0 0 1px color-mix(in oklab, var(--c, #fff) 55%, transparent);
+  transition: transform 0.15s;
+}
+input[type="range"].dial:active::-webkit-slider-thumb {
+  transform: scale(1.22);
+}
+input[type="range"].dial::-moz-range-thumb {
+  width: 12px;
+  height: 12px;
+  border-radius: 99px;
+  background: var(--c, #fff);
+  border: 2px solid var(--color-ink);
+}
+
+/* ── tab panels ── */
+@keyframes panel-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.panel-in {
+  animation: panel-in 0.42s cubic-bezier(0.16, 0.84, 0.32, 1) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+  .reveal,
+  .word,
+  .words .word {
+    opacity: 1;
+  }
+}
